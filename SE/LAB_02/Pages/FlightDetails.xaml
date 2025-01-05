@@ -1,0 +1,128 @@
+﻿<Window
+    Height="950"
+    Title="FlightDetails"
+    Width="500"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d"
+    x:Class="lab2_15.Pages.FlightDetails"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:lab2_15.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Window.Resources>
+        <ResourceDictionary Source="../styles.xaml" />
+    </Window.Resources>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Заголовок  -->
+        <TextBlock
+            FontSize="28"
+            FontWeight="Bold"
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            Margin="0,10,0,10"
+            Text="Інформація про рейс" />
+
+        <StackPanel
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            Margin="0,20,0,0"
+            VerticalAlignment="Top"
+            Width="350">
+
+            <!--  Відображення деталей рейсу  -->
+            <TextBlock
+                FontSize="16"
+                FontWeight="SemiBold"
+                Text="Точка вильоту:" />
+            <Border
+                BorderThickness="2"
+                Margin="0,5,0,10"
+                Padding="10">
+                <TextBlock Text="{Binding Departure}" />
+            </Border>
+
+            <TextBlock
+                FontSize="16"
+                FontWeight="SemiBold"
+                Text="Точка прибуття:" />
+            <Border
+                BorderThickness="2"
+                Margin="0,5,0,10"
+                Padding="10">
+                <TextBlock Text="{Binding Arrival}" />
+            </Border>
+
+            <TextBlock
+                FontSize="16"
+                FontWeight="SemiBold"
+                Text="Дата вильоту:" />
+            <Border
+                BorderThickness="2"
+                Margin="0,5,0,10"
+                Padding="10">
+                <TextBlock Text="{Binding Date}" />
+            </Border>
+
+            <TextBlock
+                FontSize="16"
+                FontWeight="SemiBold"
+                Text="Час польоту:" />
+            <Border
+                BorderThickness="2"
+                Margin="0,5,0,20"
+                Padding="10">
+                <TextBlock Text="{Binding FlightTime}" />
+            </Border>
+
+            <!--  Кнопка для отримання інформації про квитки  -->
+            <Button
+                Click="GetTicketInfo_Click"
+                Content="Отримати інформацію про квитки"
+                FontWeight="Bold"
+                Height="40"
+                Margin="0,10,0,20" />
+
+            <!--  Список квитків з кнопкою бронювання для кожного  -->
+            <ListBox
+                BorderThickness="2"
+                Height="200"
+                ItemsSource="{Binding Tickets}"
+                Margin="0,10,0,20"
+                x:Name="TicketsInfoList">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="10" Orientation="Horizontal">
+                            <!--  Відображення ціни квитка  -->
+                            <TextBlock
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Text="{Binding Price}"
+                                VerticalAlignment="Center" />
+
+                            <!--  Кнопка для бронювання  -->
+                            <Button
+                                Click="BookTicket_Click"
+                                Content="Забронювати"
+                                FontWeight="Bold"
+                                Margin="20,0,0,0"
+                                Tag="{Binding Price}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!--  Повідомлення про статус  -->
+            <TextBlock
+                FontSize="14"
+                HorizontalAlignment="Center"
+                Margin="0,10,0,0"
+                x:Name="StatusMessage" />
+        </StackPanel>
+    </Grid>
+</Window>

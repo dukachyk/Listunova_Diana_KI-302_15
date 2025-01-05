@@ -1,0 +1,124 @@
+﻿<Window
+    Height="800"
+    Title="SearchFlights"
+    Width="500"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d"
+    x:Class="lab2_15.Pages.SearchFlights"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:lab2_15.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Window.Resources>
+        <ResourceDictionary Source="../styles.xaml" />
+    </Window.Resources>
+    <Grid Margin="20">
+        <StackPanel
+            HorizontalAlignment="Center"
+            Margin="0,20,0,0"
+            VerticalAlignment="Top"
+            Width="400">
+
+            <!--  Заголовок сторінки  -->
+            <TextBlock
+                FontSize="24"
+                FontWeight="Bold"
+                HorizontalAlignment="Center"
+                Text="Пошук авіарейсів" />
+
+            <!--  Введення точки вильоту  -->
+            <TextBlock
+                FontSize="16"
+                Margin="0,10,0,5"
+                Text="Точка вильоту" />
+            <TextBox
+                BorderThickness="2"
+                Height="30"
+                HorizontalContentAlignment="Left"
+                Padding="5"
+                Text="{Binding Departure, UpdateSourceTrigger=PropertyChanged}"
+                VerticalContentAlignment="Center" />
+
+            <!--  Введення точки прибуття  -->
+            <TextBlock
+                FontSize="16"
+                Margin="0,10,0,5"
+                Text="Точка прильоту" />
+            <TextBox
+                BorderThickness="2"
+                Height="30"
+                HorizontalContentAlignment="Left"
+                Padding="5"
+                Text="{Binding Arrival, UpdateSourceTrigger=PropertyChanged}"
+                VerticalContentAlignment="Center" />
+
+            <!--  Введення дати вильоту  -->
+            <TextBlock
+                FontSize="16"
+                Margin="0,10,0,5"
+                Text="Дата вильоту" />
+            <TextBox
+                BorderThickness="2"
+                Height="30"
+                HorizontalContentAlignment="Left"
+                Padding="5"
+                Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
+                VerticalContentAlignment="Center" />
+
+            <!--  Введення часу польоту  -->
+            <TextBlock
+                FontSize="16"
+                Margin="0,10,0,5"
+                Text="Час польоту" />
+            <TextBox
+                BorderThickness="2"
+                Height="30"
+                HorizontalContentAlignment="Left"
+                Padding="5"
+                Text="{Binding FlightTime, UpdateSourceTrigger=PropertyChanged}"
+                VerticalContentAlignment="Center" />
+
+            <!--  Кнопка пошуку рейсів  -->
+            <Button
+                Command="{Binding SearchFlightsCommand}"
+                Content="Пошук рейсів"
+                FontWeight="Bold"
+                Height="40"
+                Margin="0,20,0,0" />
+
+            <!--  Список знайдених рейсів  -->
+            <ListBox
+                BorderThickness="0"
+                Height="200"
+                ItemsSource="{Binding FlightsList}"
+                Margin="0,20,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <!--  Назва рейсу  -->
+                            <TextBlock
+                                Text="{Binding _name}"
+                                VerticalAlignment="Center"
+                                Width="200" />
+
+                            <!--  Кнопка для детальнішої інформації  -->
+                            <Button
+                                Command="{Binding DataContext.ShowFlightNameCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                CommandParameter="{Binding}"
+                                Content="Детальніше"
+                                Width="150" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!--  Повідомлення про статус  -->
+            <TextBlock
+                FontSize="14"
+                HorizontalAlignment="Center"
+                Margin="0,10,0,0"
+                Text="{Binding StatusMessage}" />
+        </StackPanel>
+    </Grid>
+</Window>
