@@ -1,0 +1,5 @@
+Ship's new fuel resource: 99
+Ship's new fuel resource: 98
+Ship's new X position: 1
+Ship's new Y position: 3
+Ship's going south
